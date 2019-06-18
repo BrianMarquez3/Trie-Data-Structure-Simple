@@ -1,59 +1,58 @@
 # Programa de Python para insertar y buscar.
 # operation in a Trie 
 
-#test1
 class TrieNode: 
 	
-	# Trie node class 
+	# Trie clase node
 	def __init__(self): 
 		self.children = [None]*26
 
-		# isEndOfWord is True if node represent the end of the word 
+		# isEndOfWord es verdadero si el nodo representa el final de la palabra
 		self.isEndOfWord = False
 
 class Trie: 
 	
-	# Trie data structure class 
+	# Trie data clase estructura
 	def __init__(self): 
 		self.root = self.getNode() 
 
 	def getNode(self): 
 	
-		# Returns new trie node (initialized to NULLs) 
+		# Devuelve un nuevo nodo trie (inicializado a NULL)
 		return TrieNode() 
 
 	def _charToIndex(self,ch): 
 		
-		# private helper function 
-		# Converts key current character into index 
-		# use only 'a' through 'z' and lower case 
+		# función auxiliar privada 
+		# Convierte el personaje actual clave en índice
+		# use solo 'a' a 'z' y minúscula
 		
 		return ord(ch)-ord('a') 
 
 
 	def insert(self,key): 
 		
-		# If not present, inserts key into trie 
-		# If the key is prefix of trie node, 
-		# just marks leaf node 
+		# Si no está presente, inserta la clave en trie 
+		# Si la clave es el prefijo de trie node,
+		# solo marca el nodo de la hoja
 		pCrawl = self.root 
 		length = len(key) 
 		for level in range(length): 
 			index = self._charToIndex(key[level]) 
 
-			# if current character is not present 
+			# si el caracter actual no esta presente
 			if not pCrawl.children[index]: 
 				pCrawl.children[index] = self.getNode() 
 			pCrawl = pCrawl.children[index] 
 
-		# mark last node as leaf 
+		# marcar el último nodo como hoja
 		pCrawl.isEndOfWord = True
 
 	def search(self, key): 
 		
-		# Search key in the trie 
-		# Returns true if key presents 
-		# in trie, else false 
+		# Clave de búsqueda en el trie.
+		# Devuelve true si presenta clave
+		# en trie, sino falso
 		pCrawl = self.root 
 		length = len(key) 
 		for level in range(length): 
@@ -64,10 +63,10 @@ class Trie:
 
 		return pCrawl != None and pCrawl.isEndOfWord 
 
-# driver function 
+# Manejo de Funcion
 def main(): 
 
-	# Input keys (use only 'a' through 'z' and lower case) 
+	# Teclas de entrada (use solo 'a' a 'z' y minúscula)
 	keys = ["the","a","there","anaswe","any", 
 			"by","their"] 
 	output = ["Not present in trie", 
@@ -89,5 +88,4 @@ def main():
 if __name__ == '__main__': 
 	main() 
 
-# This code is contributed by Atul Kumar (www.facebook.com/atul.kr.007) 
 
